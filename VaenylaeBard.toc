@@ -1,0 +1,7 @@
+## Interface: 11307
+## Title: VaenylaeBard
+## Author: Vaenylae
+## Version: 1.0
+## SavedVariables: VaenylaeBardDB
+
+VaenylaeBard.lua
