@@ -739,17 +739,15 @@ This phase introduces no network calls, no authentication, no user data beyond l
 
 ---
 
-## Open Questions
+## Open Questions (RESOLVED)
 
 1. **StaticPopupDialogs `button1` field name confirmation**
    - What we know: CONTEXT.md locked decision is `self:GetParent().button1:Click()`. PITFALLS.md originally recommended `_G[self:GetName().."Button1"]:Click()`.
-   - What's unclear: Which exact form is needed in the Faebright 3.3.5a build.
-   - Recommendation: Implement the locked decision (`self:GetParent().button1:Click()`); verify in-game during SC-5 by pressing Enter in the Add Song popup. If it fails, try the `_G[...]` form as fallback.
+   - **RESOLVED:** Implement `self:GetParent().button1:Click()` per locked CONTEXT.md decision. SC-5 in-game verification (01-03 Task 3 human checkpoint) is the definitive test. Fallback `_G[self:GetParent():GetName().."Button1"]:Click()` is documented in the human-verify checkpoint if the locked form fails. PATTERNS.md confirmed ElvUI Distributor uses the `button1` lowercase field name.
 
 2. **Faebright WoW install path confirmation**
    - What we know: CONTEXT.md specifies `/home/reset/Games/Faebright WoW/Interface/AddOns/VaenylaeBard/`.
-   - What's unclear: Whether the directory already exists (WoW may need to be run once to create the AddOns structure, or the path may need `mkdir -p`).
-   - Recommendation: The deployment task should use `mkdir -p` before `cp -r` as a precaution.
+   - **RESOLVED:** The deployment task uses `mkdir -p "/home/reset/Games/Faebright WoW/Interface/AddOns/VaenylaeBard/"` before `cp` (implemented in 01-03 Task 2). Install path confirmed from CONTEXT.md locked decision.
 
 ---
 
