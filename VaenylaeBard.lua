@@ -669,7 +669,7 @@ function UpdateLineList()
             parent.buttons[i] = btn
         end
         btn:SetPoint("TOP", parent, "TOP", 0, -y)
-        btn:SetText(i .. ". " .. line.text)
+        btn:SetText(i .. ". " .. (line.text or ""))
         local capturedIndex = i  -- capture per-iteration; loop vars are shared in Lua 5.0
         local capturedLine = line
         -- SetScript on every iteration: pooled buttons retain old closures
