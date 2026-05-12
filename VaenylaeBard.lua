@@ -304,8 +304,8 @@ function CreateMainFrame()
     f:SetMovable(true)
     f:EnableMouse(true)
     f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function() this:StartMoving() end)
-    f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+    f:SetScript("OnDragStart", function(self) self:StartMoving() end)
+    f:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 
     -- Close button
     local closeBtn = CreateFrame("Button", "VaenylaeBardMainFrameClose", f, "UIPanelCloseButton")
@@ -490,8 +490,8 @@ function CreateLineEditorFrame()
     f:SetMovable(true)
     f:EnableMouse(true)
     f:RegisterForDrag("LeftButton")
-    f:SetScript("OnDragStart", function() this:StartMoving() end)
-    f:SetScript("OnDragStop", function() this:StopMovingOrSizing() end)
+    f:SetScript("OnDragStart", function(self) self:StartMoving() end)
+    f:SetScript("OnDragStop", function(self) self:StopMovingOrSizing() end)
 
     -- Title
     local title = f:CreateFontString(nil, "OVERLAY", "GameFontNormalLarge")
