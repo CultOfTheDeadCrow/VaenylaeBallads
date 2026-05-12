@@ -246,7 +246,6 @@ end
 function UpdatePerformanceControls()
     local playPauseBtn = _G["VaenylaeBardPlayPauseButton"]
     if not playPauseBtn then return end  -- guard: frames not created yet
-    local stopBtn     = _G["VaenylaeBardStopButton"]
     local modeBtn     = _G["VaenylaeBardModeButton"]
     local controlsRow = _G["VaenylaeBardControlsRow"]
     local nowLabel    = _G["VaenylaeBardNowLabel"]
