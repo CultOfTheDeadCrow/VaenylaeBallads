@@ -88,7 +88,7 @@ function StartPerformance(mode)
         return
     end
     local song = VaenylaeBardSongs[VaenylaeBardSelectedSong]
-    if not song or table.getn(song) == 0 then
+    if not song or #song == 0 then
         print("|cffff0000[Vaenylae Bard]|r Selected song has no lines.")
         return
     end
@@ -104,7 +104,7 @@ function StartPerformance(mode)
     else
         print("|cff00ffff[Vaenylae Bard]|r Auto performance started.")
     end
-    VBDebug("StartPerformance mode=" .. tostring(mode) .. " song=" .. VaenylaeBardSelectedSong .. " lines=" .. table.getn(song))
+    VBDebug("StartPerformance mode=" .. tostring(mode) .. " song=" .. VaenylaeBardSelectedSong .. " lines=" .. #song)
 end
 
 function AdvanceLine()
@@ -126,7 +126,7 @@ function AdvanceLine()
     VB_playIndex = VB_playIndex + 1
     UpdateNowNext()
 
-    if VB_playIndex > table.getn(song) then
+    if VB_playIndex > #song then
         StopPerformance()
     end
 end
@@ -158,7 +158,7 @@ playbackFrame:SetScript("OnUpdate", function(self, elapsed)
         VB_playIndex = VB_playIndex + 1
         UpdateNowNext()
 
-        if VB_playIndex > table.getn(song) then
+        if VB_playIndex > #song then
             StopPerformance()
         end
     end
@@ -627,7 +627,7 @@ function UpdateSongList()
         end
 
         btn:SetPoint("TOP", songList, "TOP", 0, -y)
-        btn:SetText(songName .. " (" .. table.getn(songData) .. " lines)")
+        btn:SetText(songName .. " (" .. #songData .. " lines)")
         local capturedName = songName  -- capture per-iteration; loop vars are shared in Lua 5.0
         btn:SetScript("OnClick", function()
             VaenylaeBardSelectedSong = capturedName
