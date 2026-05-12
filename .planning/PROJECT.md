@@ -23,16 +23,17 @@ A bard can script and perform a full song — text, emotes, channels, and pacing
 
 ### Validated
 
-(None yet — first milestone)
+Validated in Phase 1 (WotLK Compatibility Port) — 2026-05-12:
+- [x] .toc Interface version updated to 30300
+- [x] OnUpdate callback uses `elapsed` parameter instead of global `arg1`
+- [x] OnEvent callback uses `self, event, arg1` parameters instead of globals
+- [x] All SetScript closures receive `self` as explicit first parameter (no `this` global)
+- [x] StaticPopupDialogs OnShow / OnAccept / EditBoxOnEnterPressed use `self` not `this`
+- [x] `table.getn()` replaced with `#` throughout
 
 ### Active
 
-- [ ] .toc Interface version updated to 30300
-- [ ] OnUpdate callback uses `elapsed` parameter instead of global `arg1`
-- [ ] OnEvent callback uses `self, event, arg1` parameters instead of globals
-- [ ] All SetScript closures receive `self` as explicit first parameter (no `this` global)
-- [ ] StaticPopupDialogs OnShow / OnAccept / EditBoxOnEnterPressed use `self` not `this`
-- [ ] `table.getn()` replaced with `#` throughout
+(None — all v1.0 requirements validated)
 
 ### Out of Scope
 
@@ -57,8 +58,8 @@ A bard can script and perform a full song — text, emotes, channels, and pacing
 
 | Decision | Rationale | Outcome |
 |----------|-----------|---------|
-| Port without feature changes | Establishes a clean 3.3.5a baseline before any WotLK-era additions | — Pending |
-| Keep single-file structure | Addon is small enough; splitting adds complexity with no benefit | — Pending |
+| Port without feature changes | Establishes a clean 3.3.5a baseline before any WotLK-era additions | ✓ Validated Phase 1 |
+| Keep single-file structure | Addon is small enough; splitting adds complexity with no benefit | ✓ Validated Phase 1 |
 
 ## Evolution
 
@@ -78,4 +79,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-05-12 after v1.0 milestone start*
+*Last updated: 2026-05-12 — Phase 1 complete, all v1.0 requirements validated*
