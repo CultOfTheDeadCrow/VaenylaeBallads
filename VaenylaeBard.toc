@@ -1,4 +1,4 @@
-## Interface: 11307
+## Interface: 30300
 ## Title: VaenylaeBard
 ## Author: Vaenylae
 ## Version: 1.0

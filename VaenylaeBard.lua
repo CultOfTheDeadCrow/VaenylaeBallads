@@ -88,7 +88,7 @@ function StartPerformance(mode)
         return
     end
     local song = VaenylaeBardSongs[VaenylaeBardSelectedSong]
-    if not song or table.getn(song) == 0 then
+    if not song or #song == 0 then
         print("|cffff0000[Vaenylae Bard]|r Selected song has no lines.")
         return
     end
@@ -104,7 +104,7 @@ function StartPerformance(mode)
     else
         print("|cff00ffff[Vaenylae Bard]|r Auto performance started.")
     end
-    VBDebug("StartPerformance mode=" .. tostring(mode) .. " song=" .. VaenylaeBardSelectedSong .. " lines=" .. table.getn(song))
+    VBDebug("StartPerformance mode=" .. tostring(mode) .. " song=" .. VaenylaeBardSelectedSong .. " lines=" .. #song)
 end
 
 function AdvanceLine()
@@ -126,17 +126,17 @@ function AdvanceLine()
     VB_playIndex = VB_playIndex + 1
     UpdateNowNext()
 
-    if VB_playIndex > table.getn(song) then
+    if VB_playIndex > #song then
         StopPerformance()
     end
 end
 
-playbackFrame:SetScript("OnUpdate", function()
+playbackFrame:SetScript("OnUpdate", function(self, elapsed)
     if not VB_isPlaying then return end
     if VB_isManual then return end
     if VB_isPaused then return end
 
-    VB_playbackElapsed = VB_playbackElapsed + arg1
+    VB_playbackElapsed = VB_playbackElapsed + elapsed
 
     local song = VaenylaeBardSongs[VB_playingSongName]
     if not song then
@@ -153,12 +153,12 @@ playbackFrame:SetScript("OnUpdate", function()
     local effectiveDelay = math.max(line.delay or 3, VB_MIN_LINE_DELAY)
 
     if VB_playbackElapsed >= effectiveDelay then
-        VB_playbackElapsed = 0
+        VB_playbackElapsed = VB_playbackElapsed - effectiveDelay
         DispatchLine(line)
         VB_playIndex = VB_playIndex + 1
         UpdateNowNext()
 
-        if VB_playIndex > table.getn(song) then
+        if VB_playIndex > #song then
             StopPerformance()
         end
     end
@@ -195,9 +195,9 @@ end
 -- Event handler
 eventFrame:RegisterEvent("ADDON_LOADED")
 eventFrame:RegisterEvent("PLAYER_LOGOUT")
--- In WoW 1.12.1 (Lua 5.0), extra event args come through globals (arg1, arg2, ...),
--- not function parameters. OnEvent receives (self, event) at most.
-eventFrame:SetScript("OnEvent", function()
+-- In WoW 3.3.5a (Lua 5.1), extra event args are explicit function parameters.
+-- OnEvent receives (self, event, ...) where ... are event-specific args.
+eventFrame:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" and arg1 == "VaenylaeBard" then
         VBDebug("Our addon loaded, initializing...")
         InitializeAddon()
@@ -627,7 +627,7 @@ function UpdateSongList()
         end
 
         btn:SetPoint("TOP", songList, "TOP", 0, -y)
-        btn:SetText(songName .. " (" .. table.getn(songData) .. " lines)")
+        btn:SetText(songName .. " (" .. #songData .. " lines)")
         local capturedName = songName  -- capture per-iteration; loop vars are shared in Lua 5.0
         btn:SetScript("OnClick", function()
             VaenylaeBardSelectedSong = capturedName
