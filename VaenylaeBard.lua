@@ -441,13 +441,13 @@ function CreateMainFrame()
     modeBtn:SetHeight(25)
     modeBtn:SetPoint("LEFT", stopBtn, "RIGHT", 5, 0)
     modeBtn:SetText("Auto")
-    modeBtn:SetScript("OnClick", function()
-        if this:GetText() == "Auto" then
-            this:SetText("Manual")
+    modeBtn:SetScript("OnClick", function(self)
+        if self:GetText() == "Auto" then
+            self:SetText("Manual")
         else
-            this:SetText("Auto")
+            self:SetText("Auto")
         end
-        VBDebug("Mode toggled to: " .. this:GetText())
+        VBDebug("Mode toggled to: " .. self:GetText())
     end)
 
     UpdateSongList()
@@ -535,19 +535,19 @@ function CreateLineEditorFrame()
     channelBtn:SetText("SAY")
     -- SAY = white text (default)
     channelBtn:GetFontString():SetTextColor(1, 1, 1)
-    channelBtn:SetScript("OnClick", function()
+    channelBtn:SetScript("OnClick", function(self)
         if VB_currentChannel == "SAY" then
             VB_currentChannel = "YELL"
-            this:SetText("YELL")
-            this:GetFontString():SetTextColor(1, 1, 0)
+            self:SetText("YELL")
+            self:GetFontString():SetTextColor(1, 1, 0)
         elseif VB_currentChannel == "YELL" then
             VB_currentChannel = "EMOTE"
-            this:SetText("EMOTE")
-            this:GetFontString():SetTextColor(1, 0.5, 1)
+            self:SetText("EMOTE")
+            self:GetFontString():SetTextColor(1, 0.5, 1)
         else
             VB_currentChannel = "SAY"
-            this:SetText("SAY")
-            this:GetFontString():SetTextColor(1, 1, 1)
+            self:SetText("SAY")
+            self:GetFontString():SetTextColor(1, 1, 1)
         end
         UpdateTextBoxForChannel(VB_currentChannel)
         VBDebug("Channel set to: " .. VB_currentChannel)
@@ -569,13 +569,13 @@ function CreateLineEditorFrame()
     emoteTypeBtn:SetHeight(25)
     emoteTypeBtn:SetPoint("LEFT", emoteBox, "RIGHT", 5, 0)
     emoteTypeBtn:SetText("Custom")
-    emoteTypeBtn:SetScript("OnClick", function()
+    emoteTypeBtn:SetScript("OnClick", function(self)
         if VB_currentEmoteType == "custom" then
             VB_currentEmoteType = "builtin"
-            this:SetText("Built-in")
+            self:SetText("Built-in")
         else
             VB_currentEmoteType = "custom"
-            this:SetText("Custom")
+            self:SetText("Custom")
         end
         VBDebug("Emote type set to: " .. VB_currentEmoteType)
     end)
