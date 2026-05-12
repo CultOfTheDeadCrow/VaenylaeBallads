@@ -769,11 +769,11 @@ StaticPopupDialogs["VAENYLAE_BARD_ADD_SONG"] = {
     button1 = "Add",
     button2 = "Cancel",
     hasEditBox = true,
-    OnShow = function()
-        _G[this:GetName() .. "EditBox"]:SetFocus()
+    OnShow = function(self)
+        self.editBox:SetFocus()
     end,
-    OnAccept = function()
-        local songName = _G[this:GetParent():GetName() .. "EditBox"]:GetText()
+    OnAccept = function(self)
+        local songName = self.editBox:GetText()
         if songName and songName ~= "" then
             if VaenylaeBardSongs[songName] then
                 print("Song with that name already exists!")
@@ -784,8 +784,8 @@ StaticPopupDialogs["VAENYLAE_BARD_ADD_SONG"] = {
             print("Song '" .. songName .. "' added.")
         end
     end,
-    EditBoxOnEnterPressed = function()
-        _G[this:GetParent():GetName() .. "Button1"]:Click()
+    EditBoxOnEnterPressed = function(self)
+        self:GetParent().button1:Click()
     end,
     timeout = 0,
     whileDead = true,
