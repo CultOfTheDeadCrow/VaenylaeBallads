@@ -767,7 +767,7 @@ StaticPopupDialogs["VAENYLAE_BARD_ADD_SONG"] = {
     text = "Enter song name:",
     button1 = "Add",
     button2 = "Cancel",
-    hasEditBox = true,
+    hasEditBox = 1,
     OnShow = function(self)
         self.editBox:SetFocus()
     end,
