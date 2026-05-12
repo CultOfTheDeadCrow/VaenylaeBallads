@@ -675,7 +675,7 @@ function UpdateLineList()
         -- SetScript on every iteration: pooled buttons retain old closures
         btn:SetScript("OnClick", function()
             VaenylaeBardSelectedLine = capturedIndex
-            _G["VaenylaeBardLineTextBox"]:SetText(capturedLine.text)
+            _G["VaenylaeBardLineTextBox"]:SetText(capturedLine.text or "")
             _G["VaenylaeBardLineEmoteBox"]:SetText(capturedLine.emote or "")
             _G["VaenylaeBardLineDelayBox"]:SetText(tostring(capturedLine.delay or 3))
 
